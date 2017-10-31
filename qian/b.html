@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.2.1.js"></script>
+	<script>
+		$(function(){
+			$.ajax({
+                url:"http://localhost:3000/ktlx/detail",
+                type:"POST",
+                data:{
+                    id:window.location.href.split("=")[1]
+                },
+                success:function (e) {
+                    for(var i in e){
+                        $("body").append("<div>"+e[i].data+"</div>")
+                	}
+                }
+            })
+            $.ajax({
+                url:"http://localhost:3000/ktlx/list",
+                type:"GET",
+                data:{
+                    id:window.location.href.split("=")[1]
+                },
+                success:function (e) {
+                    if(window.location.href.split("?")[1]=='x'){
+                        for(var i in e){
+                        $("body").append("<div>"+e[i].name+"</div>")
+                    }
+                    }
+                    
+                }
+            })
+
+
+		})
+	</script>
+</head>
+<body>
+<ul>
+
+</ul>
+</body>
+</html>

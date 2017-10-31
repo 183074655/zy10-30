@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.2.1.js"></script>
+	
+	<style>
+		nav{
+			text-align: center;
+			margin-top: 50px;
+		}
+		a{
+			text-decoration: none;
+			color: #000;
+			margin: 0 5px;
+		}
+		li{
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<a href="#">首页</a>
+		<a href="b.html?x">新闻</a>
+		<a href="#">关于我们</a>
+	</nav>
+	<ul>
+		
+	</ul>
+
+	<script>
+
+			$.ajax({
+				url:"http://localhost:3000/ktlx/list",
+				type:"GET",
+				success:function(e){
+					for(var i in e){
+		$("ul").append("<li><a href='b.html?id="+e[i].id+"'>"+e[i].name+"</a><button onclick='a("+e[i].id+",$(this))'>删除</button></li>")
+					}
+				}
+			})
+
+			function a(id,th){
+				
+				$.ajax({
+					url:'http://localhost:3000/ktlx/delete',
+					type:'POST',
+					data:{id:id},
+					success:function(e){
+						console.log(e)
+						th.parent().remove()
+					}
+				})
+			}
+
+
+	</script>
+</body>
+</html>
